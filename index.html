@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Almaany API</title>
+  </head>
+  <body>
+    <article class="container">
+    <section class="jumbotron">
+    <img class="img-thumbnail" style="background-color: transparent; border-color: transparent" src="https://www.almaany.com/images_new/logo.png">
+    <h1 class="h1">Selamat datang ke Almaany API!</h1>
+    <p class="lead">Almaany API adalah API untuk memperoleh 
+        data terjemah dari Bahasa Indonesia ke Bahasa Arab
+        yang diambil dari situs <a href="https://almaany.com">Almaany.com</a></p>
+    <a class="btn btn-success" href="auth">Masuk ke API</a>
+    </section>
+    <section style="margin-bottom: 30px" class="container">
+    <h2 class="h2 page-header">Token</h2>
+    <p class="lead">Sebelum mengggunakan Almaany API, Anda harus memiliki <em>access token</em>.</p>
+    <p class="lead">Dapatkan token Anda dengan mengisi data Anda terlebih dahulu di bawah ini:</p>
+    <form  action="/gettoken" method="POST"  >
+        <input class="btn btn-primary" type="submit" value="Get Token"  />
+      </form>
+    </section>
+    <section style="margin-bottom: 50px;" class="container">
+        <h5  class="h5">Token Anda (rahasia)</h5>
+        <div class="container" style="background-color: 
+        rgb(241, 237, 237); border-color:dodgerblue; height: 100px">
+         <code><%= token %></code>
+        </div>
+        
+        </div>
+    </section>
+
+</article>
+    </body>
+</html>

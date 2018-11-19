@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Almaany API</title>
+  </head>
+  <body>
+    <article class="container">
+    <section class="jumbotron">
+    <img class="img-thumbnail" style="background-color: transparent; border-color: transparent" src="https://www.almaany.com/images_new/logo.png">
+    <h1 class="h1">Selamat datang ke Almaany API!</h1>
+    <p class="lead">Almaany API adalah API untuk memperoleh 
+        data terjemah dari Bahasa Indonesia ke Bahasa Arab
+        yang diambil dari situs <a href="https://almaany.com">Almaany.com</a></p>
+    </section>
+    <section class="container">
+    <h2 class="h2 page-header">Token Authentication</h2>
+    <p class="lead">Masukkan token Anda untuk mengakses API</em>.</p>
+    <form  action="/verify" method="POST"  >
+    <div style="margin-bottom: 30px;">
+        <textarea name="token" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <input class="btn btn-primary" type="submit" value="Verify Token"  />
+      </form>
+    </section>
+
+</article>
+    </body>
+</html>
