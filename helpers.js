@@ -2,9 +2,6 @@ var qs   = require('querystring');
 var fs   = require('fs');
 var pathview = require('path');
 
-var level = require('level');
-var db = level(__dirname + '/db');
-
 var jwt  = require('jsonwebtoken');
 var secret = process.env.JWT_SECRET || "ini rahasia"; // super secret
 
@@ -34,14 +31,7 @@ function generateGUID() {
   function generateAndStoreToken(req, opts) {
     var GUID   = generateGUID(); // write/use a better GUID generator in practice
     var token  = generateToken(req, GUID, opts);
-    var record = {
-      "valid" : true,
-      "created" : new Date().getTime()
-    };
-  
-    db.put(GUID, JSON.stringify(record), function (err) {
-      // console.log("record saved ", record);
-    });
+   
   
     return token;
   }

@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "This is API for Almaany.com Built by 18216027 Luthfi Fachriza Sandi using Node.js",
   "main": "helpers.js",
-  "dependencies": {
-    "level": "^4.0.0"
-  },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
