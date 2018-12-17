@@ -3,6 +3,15 @@
   "version": "1.0.0",
   "description": "This is API for Almaany.com Built by 18216027 Luthfi Fachriza Sandi using Node.js",
   "main": "helpers.js",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "ejs": "^2.6.1",
+    "jsonwebtoken": "^8.4.0",
+    "puppeteer": "^1.11.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -16,13 +25,5 @@
   "bugs": {
     "url": "https://github.com/lfreeza/almaany-api/issues"
   },
-  "homepage": "https://github.com/lfreeza/almaany-api#readme",
-  "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
-    "ejs": "^2.6.1",
-    "jsonwebtoken": "^8.4.0",
-    "puppeteer": "^1.11.0",
-    "request-promise": "^4.2.2"
-  },
-  "devDependencies": {}
+  "homepage": "https://github.com/lfreeza/almaany-api#readme"
 }
