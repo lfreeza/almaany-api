@@ -1,6 +1,9 @@
 var qs   = require('querystring');
+const rp = require('request-promise');
 var fs   = require('fs');
 var pathview = require('path');
+var indoarab  = require('./indoarab');
+const url= 'https://www.almaany.com/id/dict/ar-id/';
 
 var jwt  = require('jsonwebtoken');
 var secret = process.env.JWT_SECRET || "ini rahasia"; // super secret
@@ -109,6 +112,37 @@ function authHandler(req, res){
   } 
 }
 
+//Web Scraping
+function api(req,res){
+  //success!
+  var tes = '';
+    
+  var body = '';
+  req.on('data', function (data) {
+    body += data;
+  }).on('end', function () {
+    var post = qs.parse(body);
+    console.log(post.indo);
+    console.log(typeof(post.indo));
+    tes = post.indo;
+   
+  });
+
+  rp(url)
+  .then(function(html) {
+      return indoarab('https://www.almaany.com/id/dict/ar-id/' + tes);
+  })
+  .then(function(kata) {
+    res.setHeader('Content-Type', 'application/json');
+    return res.end(JSON.stringify(kata));
+  })
+  .catch(function(err) {
+    //handle erroring
+    console.log(err);
+  });
+
+}
+
 
 
 
@@ -125,6 +159,7 @@ module.exports = {
   authHandler: authHandler,
   verify: verify,
   authSuccess: authSuccess,
-  authFail: authFail
+  authFail: authFail,
+  api:api
   
 }
