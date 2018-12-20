@@ -6,7 +6,7 @@ var indoarab  = require('./indoarab');
 const url= 'https://www.almaany.com/id/dict/ar-id/';
 
 var jwt  = require('jsonwebtoken');
-var secret = process.env.JWT_SECRET || "ini rahasia"; // super secret
+var secret = process.env.JWT_SECRET || "18216027"; 
 
 
 
@@ -18,9 +18,6 @@ function generateGUID() {
   function generateToken(req, GUID, opts) {
     opts = opts || {};
   
-    // By default, expire the token after 7 days.
-    // NOTE: the value for 'exp' needs to be in seconds since
-    // the epoch as per the spec!
     var expiresDefault = '7d';
   
     var token = jwt.sign({
@@ -34,14 +31,8 @@ function generateGUID() {
   function generateAndStoreToken(req, opts) {
     var GUID   = generateGUID(); // write/use a better GUID generator in practice
     var token  = generateToken(req, GUID, opts);
-   
-  
     return token;
   }
-
- 
-
-
 
 function loadView(view) {
     var filepath = pathview.resolve(__dirname, view + '.html');
@@ -85,7 +76,7 @@ function authSuccess( res) {
 }
 
 
-// show fail page (login)
+// show fail page
 function authFail(res, callback) {
   res.writeHead(401, {'content-type': 'text/html'});
   return res.end(fail);
@@ -112,25 +103,21 @@ function authHandler(req, res){
   } 
 }
 
-//Web Scraping
-function api(req,res){
-  //success!
-  var tes = '';
-    
-  var body = '';
-  req.on('data', function (data) {
-    body += data;
-  }).on('end', function () {
-    var post = qs.parse(body);
-    console.log(post.indo);
-    console.log(typeof(post.indo));
-    tes = post.indo;
-   
-  });
+function getParameterByName(name, url) {
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, '\\$&');
+  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
 
+//Web Scraping
+function webscrap(indo,res){
   rp(url)
   .then(function(html) {
-      return indoarab('https://www.almaany.com/id/dict/ar-id/' + tes);
+      return indoarab('https://www.almaany.com/id/dict/ar-id/' + indo);
   })
   .then(function(kata) {
     res.setHeader('Content-Type', 'application/json');
@@ -140,8 +127,29 @@ function api(req,res){
     //handle erroring
     console.log(err);
   });
+}
+
+function api(req,res){
+  //success!
+  var indo = getParameterByName('indo', req.url);
+  var token =  getParameterByName('token', req.url);
+
+  if (verify(token)){
+    webscrap(indo,res);
+  }
+  else{
+    var error = {
+      "Error": {
+        "code": 401,
+        "message": "Unauthorized Access, please insert a valid token"
+      }
+     };
+    res.setHeader('Content-Type', 'application/json');
+    return res.end(JSON.stringify(error));
+  }
 
 }
+
 
 
 

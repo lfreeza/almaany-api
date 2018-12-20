@@ -1,8 +1,9 @@
-var port = process.env.PORT || 8888; // let heroku define port or use 1337
+var port = process.env.PORT || 8888; // let heroku define port or use 8888
 var http = require('http');          // core node.js http (no frameworks)
 var url = require('url');            // core node.js url (no frameworks)
 var app  = require('./helpers'); // auth, token verification & render helpers, etc
 var ejs = require('ejs');
+
 
 http.createServer(function (req, res) {
   var path = url.parse(req.url).pathname;
